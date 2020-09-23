@@ -57,3 +57,41 @@ Login again
 
 After few minutes (depending on the speed of your Internet connection, you should have k3s server install with all the components you need to run k3s including kubectl. 
 
+## Optional External Storage
+Get the device uuid
+
+#ls -l /dev/disk/by-uuid/ {this should list you the UUIDs attached}
+
+Copy the uuid of the USB Drive
+
+Create a mount point
+
+#sudo mkdir /media/usb
+
+Give the ownership to the pi user
+
+#sudo chown -R pi:pi /media/usb
+
+Manually mount and test it
+
+#sudo mount /dev/sda1 /media/usb -o uid=pi,gid=pi
+#cd /media/usb
+#mkdir data
+#ls –al /media/usb
+
+Setup for auto-mount (please not if not when you reboot the mount will not persist)​
+
+#sudo vi /etc/fstab
+
+Edit the following line and replace the bold UUID with yours
+
+**UUID=18A9-9943** /media/usb vfat auto,nofail,noatime,users,rw,uid=pi,gid=pi 0 0
+
+vfat - works for my mount, however you may have ntfs, ext3, etx4 etc - please change accordingly
+
+Reboot and test
+#sudo reboot
+
+You will have to ssh again as it would have closed the ssh session on reboot
+#ssh pi@ip-address
+#ls -al /media/usb
