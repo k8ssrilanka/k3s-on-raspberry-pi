@@ -29,10 +29,11 @@ Save and exit
 Open /etc/dhcpcd.conf and add a static IP (in this example I am using eth0, however you can do the same in wlan as well)
 
 Use vi or nano whichever you are comfortable with for editing the file and make changes to the following section
-interface eth0
-static ip_address=$ip/24 {your local ip address}
-static routers=$dns {your local dns}
-static domain_name_servers=$dns {name servers if you are using a name server}
+
+interface eth0<br>
+static ip_address=$ip/24 {your local ip address}<br>
+static routers=$dns {your local dns}<br>
+static domain_name_servers=$dns {name servers if you are using a name server}<br>
 
 Save and exit
 
@@ -44,10 +45,10 @@ Once you have rebooted you should be able to remotely login to Raspberry Pi via 
 #ssh pi@ip-address
 
 **Enabling legacy iptables on Raspbian Buster**
-#sudo iptables -F
-#sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
-#sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
-#sudo reboot
+#sudo iptables -F<br>
+#sudo update-alternatives --set iptables /usr/sbin/iptables-legacy<br>
+#sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy<br>
+#sudo reboot<br>
 
 Login again
 #ssh pi@ip-address
@@ -87,11 +88,11 @@ Edit the following line and replace the bold UUID with yours
 
 **UUID=18A9-9943** /media/usb vfat auto,nofail,noatime,users,rw,uid=pi,gid=pi 0 0
 
-vfat - works for my mount, however you may have ntfs, ext3, etx4 etc - please change accordingly
+vfat - works for my mount, however you may have ntfs, ext3, etx4 etc - please change accordingly. Further you need ntfs-3g to mount ntfs devices. 
 
 Reboot and test
 #sudo reboot
 
 You will have to ssh again as it would have closed the ssh session on reboot
-#ssh pi@ip-address
+#ssh pi@ip-address<br>
 #ls -al /media/usb
